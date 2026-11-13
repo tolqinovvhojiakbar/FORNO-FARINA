@@ -1,0 +1,58 @@
+/* FORNO & FARINA — yengil animatsiyalar. Hammasi transform/opacity: tez va batareyaga yengil.
+   prefers-reduced-motion yoqilgan bo'lsa, hammasi o'chadi. */
+
+/* 1. Sahifa ochilishi */
+@keyframes fx-fade{from{opacity:0}}
+@keyframes fx-up{from{opacity:0;transform:translateY(22px)}}
+@keyframes fx-down{from{opacity:0;transform:translateY(-18px)}}
+.ready .site-header{animation:fx-down .9s var(--ease) .15s both}
+.ready .hero-intro .eyebrow{animation:fx-up .9s var(--ease) .35s both}
+.ready .hero-intro h1{animation:fx-up 1.1s var(--ease) .5s both}
+.ready .hero-intro .hero-sub{animation:fx-up 1s var(--ease) .75s both}
+.ready .hero-intro .btn{animation:fx-up 1s var(--ease) .95s both}
+.ready .scroll-cue{animation:fx-fade 1.2s ease 1.4s both}
+
+/* 2. Scroll progress chizig'i */
+.scroll-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:100;transform-origin:left;transform:scaleX(0);background:var(--gradient-gold);pointer-events:none}
+
+/* 3. Paydo bo'lish variantlari (mavjud .reveal ustiga) */
+.js .reveal.fx-left{transform:translateX(-36px)}
+.js .reveal.fx-right{transform:translateX(36px)}
+.js .reveal.fx-zoom{transform:scale(.94)}
+.js .reveal.in{transform:none}
+.js .reveal.done{transition-delay:0s}
+
+/* 4. Karta va tugmalar */
+.js .pizza.reveal.in.done:hover{transform:translateY(-8px);box-shadow:0 40px 90px -40px rgba(0,0,0,.95),0 0 0 1px rgba(212,163,115,.25)}
+.tile,.info-card,.glass-card{transition:transform .6s var(--ease),border-color .5s}
+.tile:hover,.info-card:hover{transform:translateY(-4px);border-color:rgba(212,163,115,.35)}
+.btn-gold{position:relative;overflow:hidden;isolation:isolate}
+.btn-gold::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);transform:translateX(-120%)}
+.btn-gold:hover::after{transform:translateX(120%);transition:transform .9s var(--ease)}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.btn .icon{transition:transform .4s var(--ease)}
+.btn:hover .icon{transform:translateX(4px)}
+
+/* 5. Doimiy mayda harakatlar */
+@keyframes fx-float{50%{transform:translateY(-6px)}}
+@keyframes fx-glow{50%{opacity:.55}}
+@keyframes fx-shine{to{background-position:200% center}}
+.chip .icon{animation:fx-glow 2.4s ease-in-out infinite;color:var(--ember)}
+.pizza .num{animation:fx-float 4s ease-in-out infinite}
+.hero h1 em.gold,.heading h2 em.gold{background-size:200% auto;background-image:linear-gradient(100deg,#9c7249 0%,#f0c98f 30%,#d4a373 50%,#f0c98f 70%,#9c7249 100%);animation:fx-shine 6s linear infinite}
+.cart-btn:hover .icon{animation:fx-float .6s ease}
+.info .ico{transition:transform .5s var(--ease),background .3s}
+.info:hover .ico{transform:scale(1.12) rotate(-6deg)}
+.insta-round:hover{transform:translateY(-3px) rotate(8deg)}
+
+/* 6. Menyudagi rasm yengil parallax (JS --py beradi) */
+.pizza .photo img{will-change:transform}
+
+@media(prefers-reduced-motion:reduce){
+  .ready .site-header,.ready .hero-intro>*,.ready .scroll-cue,.chip .icon,.pizza .num,
+  .hero h1 em.gold,.heading h2 em.gold{animation:none!important}
+  .js .reveal.fx-left,.js .reveal.fx-right,.js .reveal.fx-zoom{transform:none}
+  .scroll-progress{display:none}
+  .tile:hover,.info-card:hover,.btn:hover{transform:none}
+}
